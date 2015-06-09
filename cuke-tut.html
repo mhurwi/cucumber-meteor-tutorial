@@ -1,0 +1,25 @@
+<head>
+  <title>cuke-tut</title>
+</head>
+
+  <body>
+    <h1>Welcome to Meteor!</h1>
+    {{> loginButtons}}
+    {{> hello}}
+  </body>
+
+<template name="hello">
+  <div>
+    {{#if currentUser}}
+      <form id="createWidgetForm">
+        <input type="text" name="name" id="name" />
+        <button type="submit" name="submit" id="createWidget">Create Widget</button>
+      </form>
+    {{/if}}
+    {{#each widgets}}
+      <p class="widget-name">
+        {{name}}
+      </p>
+    {{/each}}
+  </div>
+</template>
