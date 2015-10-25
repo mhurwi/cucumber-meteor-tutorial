@@ -1,4 +1,4 @@
-var assert = require('assert');
+
 
 (function () {
 
@@ -6,37 +6,30 @@ var assert = require('assert');
 
   module.exports = function () {
 
-    this.Given(/^I am logged in$/, function (callback) {
-      this.client.
-      url(process.env.ROOT_URL).
-      waitForExist('body *').
-      waitForVisible('body *').
-      click('#login-sign-in-link').
-      setValue('#login-email', 'bob@example.com').
-      setValue('#login-password', 'testtest').
-      click('#login-buttons-password').
-      call(callback);
+    this.Given(/^I am logged in$/, function () {
+      browser.url(process.env.ROOT_URL);
+      browser.waitForExist('body *');
+      browser.waitForVisible('body *');
+      browser.waitForExist('#login-sign-in-link');
+      browser.click('#login-sign-in-link');
+      browser.setValue('#login-email', 'bob@example.com');
+      browser.setValue('#login-password', 'testtest');
+      browser.click('#login-buttons-password');
     });
 
-    this.When(/^I fill in the name with "([^"]*)"$/, function (arg1, callback) {
-      this.client.
-      setValue('#name', 'Alpha').
-      call(callback);
+    this.When(/^I fill in the name with "([^"]*)"$/, function (arg1) {
+      browser.waitForVisible('#name');
+      browser.setValue('#name', 'Alpha');
     });
 
-    this.When(/^I click the button "([^"]*)"$/, function (arg1, callback) {
-      this.client.
-      click('#createWidget').
-      call(callback);
+    this.When(/^I click the button "([^"]*)"$/, function (arg1) {
+      browser.click('#createWidget');
     });
 
-    this.Then(/^I should see a widget named "([^"]*)"$/, function (arg1, callback) {
-      this.client.
-      waitForExist('.widget-name', 100).
-      getText('.widget-name').then( function (names) {
-        assert.equal(names[0], 'Alpha');
-      }).
-      call(callback);
+    this.Then(/^I should see a widget named "([^"]*)"$/, function (arg1) {
+      browser.waitForExist('.widget-name');
+      var widgetName = browser.getText('.widget-name');
+			expect(widgetName).toEqual("Alpha");
 
     });
 
