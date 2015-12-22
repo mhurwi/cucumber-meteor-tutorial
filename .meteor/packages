@@ -6,7 +6,6 @@
 
 autopublish
 insecure
-xolvio:cucumber
 accounts-ui
 accounts-password
 standard-minifiers
@@ -23,3 +22,4 @@ random
 ejson
 spacebars
 check
+fixtures
